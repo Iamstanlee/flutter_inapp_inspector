@@ -21,7 +21,7 @@ dependencies:
       url: https://github.com/iamstanlee/flutter_inapp_inspector.git
 ```
 
-Initialize the App Inspector in your app (debug mode only):
+Initialize the App Inspector in your app (dev/qa flavor only):
 
 ```dart
 import 'package:flutter_inapp_inspector/app_inspector.dart';
@@ -44,13 +44,31 @@ This will add a floating action button to your app that opens the App Inspector 
 
 ## Using the Inspectors
 
+### Requests Inspector
+
+The Requests Inspector automatically tracks all HTTP requests made using Dio. You can view the request method, URL,
+status code, and response time. The requests are sorted by the latest request first.
+```dart
+  dio.interceptors.add(AppInspectorDioInterceptor()); 
+```
+
 ### Bloc Inspector
 
 The Bloc Inspector is automatically set up when you initialize the App Inspector. It will track all Bloc state changes in your app.
+You can view the current state of each Bloc and see how it changes over time. This is useful for debugging state management issues.
+```dart
+  Bloc.observer = AppInspectorBlocObserver();
+```
 
 ### Navigation Inspector
 
 The Navigation Inspector is automatically set up when you initialize the App Inspector with the `navigatorObservers` parameter. Make sure to use the same list of observers in your MaterialApp.
+```dart
+  MaterialApp(
+    navigatorObservers: [AppInspectorNavigatorObserver()],
+    // other properties...
+  );
+```
 
 ### Log Inspector
 
@@ -59,5 +77,12 @@ The Log Inspector provides methods to log messages at different levels:
 - Info: For informational messages
 - Warning: For potential issues that aren't errors
 - Error: For error messages
+```dart
+final log = LogFactory('main'); 
+log.i('App started successfully');
+log.d('Debugging some feature');
+log.w('This is a warning message');
+log.e('An error occurred', stackTrace);
+```
 
 You can also add tags to categorize logs and include error and stack trace information for better debugging.

@@ -55,7 +55,7 @@ class RequestInspector {
   }
 }
 
-class AppInspectorInterceptor extends Interceptor {
+class AppInspectorDioInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final startTime = DateTime.now();

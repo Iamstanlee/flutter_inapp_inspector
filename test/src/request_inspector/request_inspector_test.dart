@@ -149,7 +149,7 @@ void main() {
   });
 
   group('AppInspectorInterceptor', () {
-    late AppInspectorInterceptor interceptor;
+    late AppInspectorDioInterceptor interceptor;
     late MockRequestOptions mockRequestOptions;
     late MockResponse mockResponse;
     late MockDioException mockDioException;
@@ -163,7 +163,7 @@ void main() {
     });
 
     setUp(() {
-      interceptor = AppInspectorInterceptor();
+      interceptor = AppInspectorDioInterceptor();
       mockRequestOptions = MockRequestOptions();
       mockResponse = MockResponse();
       mockDioException = MockDioException();
