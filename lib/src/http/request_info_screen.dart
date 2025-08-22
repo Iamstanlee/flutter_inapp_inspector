@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:flutter_inapp_inspector/app_inspector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_inapp_inspector/app_inspector.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:intl/intl.dart';
 
@@ -55,68 +55,70 @@ class _RequestInfoScreenState extends State<RequestInfoScreen> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildSection(
-              title: 'General',
-              children: [
-                _buildInfoRow('Method', widget.request.method),
-                _buildInfoRow('URL', widget.request.url),
-                _buildInfoRow(
-                    'Status', '${widget.request.statusCode ?? "N/A"}'),
-                _buildInfoRow(
-                    'Time', _formatTimestamp(widget.request.timestamp)),
-                _buildInfoRow(
-                    'Size', _strSize(widget.request.response.toString())),
-                _buildDurationRow(
-                  widget.request.startTime,
-                  widget.request.endTime,
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            _buildSection(
-              title: 'Headers',
-              children: [
-                if (widget.request.headers != null)
-                  for (final entry in widget.request.headers!.entries)
-                    _buildInfoRow(entry.key, entry.value.toString()),
-              ],
-            ),
-            const SizedBox(height: 16),
-            if (widget.request.data != null) ...[
+      body: Scrollbar(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               _buildSection(
-                title: 'Payload',
+                title: 'General',
                 children: [
-                  _buildJsonViewer(widget.request.data),
-                ],
-              ),
-              const SizedBox(height: 16),
-            ],
-            if (widget.request.response != null) ...[
-              _buildSection(
-                title: 'Response',
-                children: [
-                  _buildJsonViewer(widget.request.response),
-                ],
-              ),
-              const SizedBox(height: 16),
-            ],
-            if (widget.request.error != null) ...[
-              _buildSection(
-                title: 'Error',
-                children: [
-                  Text(
-                    widget.request.error.toString(),
-                    style: const TextStyle(color: Colors.red),
+                  _buildInfoRow('Method', widget.request.method),
+                  _buildInfoRow('URL', widget.request.url),
+                  _buildInfoRow(
+                      'Status', '${widget.request.statusCode ?? "N/A"}'),
+                  _buildInfoRow(
+                      'Time', _formatTimestamp(widget.request.timestamp)),
+                  _buildInfoRow(
+                      'Size', _strSize(widget.request.response.toString())),
+                  _buildDurationRow(
+                    widget.request.startTime,
+                    widget.request.endTime,
                   ),
                 ],
               ),
+              const SizedBox(height: 16),
+              _buildSection(
+                title: 'Headers',
+                children: [
+                  if (widget.request.headers != null)
+                    for (final entry in widget.request.headers!.entries)
+                      _buildInfoRow(entry.key, entry.value.toString()),
+                ],
+              ),
+              const SizedBox(height: 16),
+              if (widget.request.data != null) ...[
+                _buildSection(
+                  title: 'Payload',
+                  children: [
+                    _buildJsonViewer(widget.request.data),
+                  ],
+                ),
+                const SizedBox(height: 16),
+              ],
+              if (widget.request.response != null) ...[
+                _buildSection(
+                  title: 'Response',
+                  children: [
+                    _buildJsonViewer(widget.request.response),
+                  ],
+                ),
+                const SizedBox(height: 16),
+              ],
+              if (widget.request.error != null) ...[
+                _buildSection(
+                  title: 'Error',
+                  children: [
+                    Text(
+                      widget.request.error.toString(),
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                  ],
+                ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );
@@ -173,9 +175,7 @@ class _RequestInfoScreenState extends State<RequestInfoScreen> {
       child: GestureDetector(
         onLongPress: () => _copyToClipboard(jsonString),
         child: Text(
-          jsonString.length > 10000
-              ? '${jsonString.substring(0, 10000)}...'
-              : jsonString,
+          jsonString,
           style: const TextStyle(fontFamily: 'monospace'),
         ),
       ),
