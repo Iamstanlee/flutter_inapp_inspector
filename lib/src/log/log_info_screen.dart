@@ -53,10 +53,7 @@ class LogInfoScreen extends StatelessWidget {
   Widget _buildSectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
-      child: Text(
-        title,
-        style: TextStyle(fontSize: 12)
-      ),
+      child: Text(title, style: TextStyle(fontSize: 12)),
     );
   }
 
@@ -91,7 +88,6 @@ class LogInfoScreen extends StatelessWidget {
 
   Widget _buildInfoCard(String content) {
     return Card(
-      elevation: 0,
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: SizedBox(
@@ -105,11 +101,7 @@ class LogInfoScreen extends StatelessWidget {
   }
 
   Widget _buildMessageCard(String message) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(4),
-      ),
+    return Card(
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: SizedBox(
@@ -127,8 +119,6 @@ class LogInfoScreen extends StatelessWidget {
 
   Widget _buildStackTraceCard(String stackTrace) {
     return Card(
-      elevation: 1,
-      color: Colors.grey.shade100,
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: SizedBox(

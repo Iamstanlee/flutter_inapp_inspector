@@ -56,6 +56,7 @@ class _LogInspectorScreenState extends State<LogInspectorScreen> {
   Widget _buildLogItem(BuildContext context, LogEntry log, int index) {
     return ListTile(
       title: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             padding: const EdgeInsets.all(2.0),
@@ -72,11 +73,7 @@ class _LogInspectorScreenState extends State<LogInspectorScreen> {
           ),
           const SizedBox(width: 8.0),
           if (log.tag != null) ...[
-            Container(
-              padding: const EdgeInsets.all(2.0),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-              ),
+            Expanded(
               child: Text(
                 log.tag!,
                 style: TextStyle(fontSize: 12),

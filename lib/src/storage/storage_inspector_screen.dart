@@ -172,7 +172,6 @@ class _StorageInspectorScreenState extends State<StorageInspectorScreen> {
             icon: const Icon(
               Iconsax.document_copy1,
               size: 18,
-              color: Colors.black,
             ),
             onPressed: () {
               Clipboard.setData(ClipboardData(text: '${entry.value}'));
@@ -219,7 +218,6 @@ class _InfoBottomsheet extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(16),
           topRight: Radius.circular(16),

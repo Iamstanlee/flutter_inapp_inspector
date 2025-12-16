@@ -66,6 +66,10 @@ class _RequestInspectorScreenState extends State<RequestInspectorScreen> {
               request.url,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: 14,
+                letterSpacing: 0.3,
+              ),
             ),
           ),
         ],
@@ -77,7 +81,6 @@ class _RequestInspectorScreenState extends State<RequestInspectorScreen> {
             'Status: ${request.statusCode ?? "Connection Failed"}',
             style: TextStyle(
               fontSize: 12,
-              fontFamily: 'monospace',
               color: statusColor,
             ),
           ),

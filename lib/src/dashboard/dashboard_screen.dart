@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_inapp_inspector/src/http/request_inspector_screen.dart';
 import 'package:flutter_inapp_inspector/src/log/log_inspector_screen.dart';
 import 'package:flutter_inapp_inspector/src/storage/storage_inspector_screen.dart';
-import 'package:flutter/material.dart';
 
 /// The main dashboard screen for the App Inspector.
 ///
@@ -38,8 +38,7 @@ class _DashboardScreenState extends State<DashboardOverviewScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('App Inspector'),
-        backgroundColor: Colors.red,
+        title: const Text('APP INSPECTOR'),
         actions: [
           IconButton(
             onPressed: widget.onClose,

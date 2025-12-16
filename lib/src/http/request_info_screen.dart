@@ -169,7 +169,7 @@ class _RequestInfoScreenState extends State<RequestInfoScreen> {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.grey[100],
+        color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(4),
       ),
       child: GestureDetector(
