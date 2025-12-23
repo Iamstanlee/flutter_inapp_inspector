@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_inspector/src/feature_flag/feature_flag_inspector_screen.dart';
 import 'package:flutter_inapp_inspector/src/http/request_inspector_screen.dart';
 import 'package:flutter_inapp_inspector/src/log/log_inspector_screen.dart';
 import 'package:flutter_inapp_inspector/src/storage/storage_inspector_screen.dart';
@@ -25,7 +26,7 @@ class _DashboardScreenState extends State<DashboardOverviewScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -68,6 +69,7 @@ class _DashboardScreenState extends State<DashboardOverviewScreen>
               icon: Icon(Icons.dataset_rounded),
               text: 'Storage',
             ),
+            Tab(icon: Icon(Icons.flag), text: 'Flags'),
           ],
         ),
       ),
@@ -78,6 +80,7 @@ class _DashboardScreenState extends State<DashboardOverviewScreen>
           LogInspectorScreen(),
           // NavigationInspectorScreen(),
           StorageInspectorScreen(),
+          FeatureFlagInspectorScreen(),
         ],
       ),
     );

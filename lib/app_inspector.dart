@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_inapp_inspector/src/feature_flag/feature_flag_inspector.dart';
+import 'package:flutter_inapp_inspector/src/feature_flag/feature_flag_provider.dart';
 import 'package:flutter_inapp_inspector/src/log/log_inspector.dart';
 import 'package:flutter_inapp_inspector/src/storage/storage_inspector.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -10,6 +12,7 @@ export 'src/app_inspector_view.dart';
 export 'src/http/request_inspector.dart';
 export 'src/log/log_inspector.dart';
 export 'src/storage/storage_inspector.dart';
+export 'src/feature_flag/feature_flag_provider.dart';
 
 /// The main entry point for the App Inspector.
 class AppInspector {
@@ -29,6 +32,7 @@ class AppInspector {
     BuildContext context, {
     FlutterSecureStorage? secureStorage,
     SharedPreferences? sharedPrefs,
+    FeatureFlagProvider? featureFlagProvider,
   }) {
     if (_isInitialized) return;
     _isInitialized = true;
@@ -41,6 +45,10 @@ class AppInspector {
     if (secureStorage != null) {
       StorageInspector.instance
           .initializeSecureStorage(secureStorage: secureStorage);
+    }
+
+    if (featureFlagProvider != null) {
+      FeatureFlagInspector.instance.initialize(featureFlagProvider);
     }
 
     // Add a log message to indicate that the App Inspector is initialized
