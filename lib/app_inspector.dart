@@ -34,30 +34,33 @@ class AppInspector {
     SharedPreferences? sharedPrefs,
     FeatureFlagProvider? featureFlagProvider,
   }) {
-    if (_isInitialized) return;
-    _isInitialized = true;
+    // One-time service setup guarded
+    if (!_isInitialized) {
+      _isInitialized = true;
 
-    // Initialize StorageInspector
-    if (sharedPrefs != null) {
-      StorageInspector.instance.initializePrefs(sharedPrefs: sharedPrefs);
+      if (sharedPrefs != null) {
+        StorageInspector.instance.initializePrefs(sharedPrefs: sharedPrefs);
+      }
+      if (secureStorage != null) {
+        StorageInspector.instance
+            .initializeSecureStorage(secureStorage: secureStorage);
+      }
+      if (featureFlagProvider != null) {
+        FeatureFlagInspector.instance.initialize(featureFlagProvider);
+      }
+
+      const LogFactory('AppInspector').i('App Inspector initialized');
     }
 
-    if (secureStorage != null) {
-      StorageInspector.instance
-          .initializeSecureStorage(secureStorage: secureStorage);
-    }
-
-    if (featureFlagProvider != null) {
-      FeatureFlagInspector.instance.initialize(featureFlagProvider);
-    }
-
-    // Add a log message to indicate that the App Inspector is initialized
-    const LogFactory('AppInspector').i('App Inspector initialized');
-
+    // Overlay insertion, always re-run against the current context
     WidgetsBinding.instance.addPostFrameCallback((_) => _addOverlay(context));
   }
 
   static void _addOverlay(BuildContext context) {
+    // Remove the previous entry before inserting into the new Overlay
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+
     _overlayEntry = OverlayEntry(
       builder: (context) => const AppInspectorView(),
     );
